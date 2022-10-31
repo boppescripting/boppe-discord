@@ -9,7 +9,7 @@ Please review the INSTALL.md for information on how to setup the script.
 ---
 
 # Support & Suggestions
-Feel free to join the Discord server for either!
+Feel free to join the [Discord server](https://discord.gg/wyeZYCrugs) for either!
 
 ---
 
