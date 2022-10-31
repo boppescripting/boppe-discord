@@ -1,0 +1,16 @@
+{
+    "name": "boppe-discord",
+    "version": "1.0.0",
+    "description": "boppe-discord serves as a simple bridge between Discord and your QBCore server to allow for moderation and staff action without the need to join the server itself.",
+    "author": "Boppe Scripting",
+    "dependencies": {
+      "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+      "discord.js": "^13.8.0",
+      "json": ">=10.0.0",
+      "node-gyp": "^5.0.3",
+      "winston": "^3.2.1"
+    },
+    "scripts": {
+      "start": "node index.js"
+    }
+  }
