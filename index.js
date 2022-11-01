@@ -155,70 +155,71 @@ client.on('interactionCreate', async(interaction) => {
     // COMMANDS
 	if (!interaction.isCommand()) return;
     const { commandName, options } = interaction
+    interaction.deferReply();
 
     if (commandName == 'setjob') {
-        if (checkAuthorization(interaction) == false) { interaction.reply({content: `You don't have permission.`}); return; } 
+        if (checkAuthorization(interaction) == false) { interaction.editReply({content: `You don't have permission.`}); return; } 
 
         const sid = options.getString('id')
         const jobcode = options.getString('jobcode')
         const grade = options.getString('grade')
 
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
-        if (Player === undefined) { interaction.reply({ content: `We could not find a player by the id: ${sid}.` }); return; }
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         if (Player.Functions.SetJob(jobcode, grade)) {
             logMessage(`<@${interaction.user.id}> has just set the job for **SERVER ID** - ${sid} | **JOB CODE** - ${jobcode} | **JOB GRADE** - ${grade}`)
-            interaction.reply({ content: `**JOB SET** -> **SERVER ID** - ${sid} | **JOB CODE** - ${jobcode} | **JOB GRADE** - ${grade}` })
+            interaction.editReply({ content: `**JOB SET** -> **SERVER ID** - ${sid} | **JOB CODE** - ${jobcode} | **JOB GRADE** - ${grade}` })
         } else {
-            interaction.reply({ content: `There was an error setting their job.` })
+            interaction.editReply({ content: `There was an error setting their job.` })
         }
     } else if (commandName == 'addmoney') {
-        if (checkAuthorization(interaction) == false) { interaction.reply({content: `You don't have permission.`}); return; } 
+        if (checkAuthorization(interaction) == false) { interaction.editReply({content: `You don't have permission.`}); return; } 
 
         const sid = options.getString('id')
         const moneyType = options.getString('moneytype')
         const amountOfMoney = options.getString('amountofmoney')
 
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
-        if (Player === undefined) { interaction.reply({ content: `We could not find a player by the id: ${sid}.` }); return; }
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         if (Player.Functions.AddMoney(moneyType, amountOfMoney)) {
             logMessage(`<@${interaction.user.id}> has just added money for **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}`)
-            interaction.reply({ content: `**MONEY ADDED** -> **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}` })
+            interaction.editReply({ content: `**MONEY ADDED** -> **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}` })
         } else {
-            interaction.reply({ content: `There was an error adding their money.` })
+            interaction.editReply({ content: `There was an error adding their money.` })
         }
     } else if (commandName == 'setmoney') {
-        if (checkAuthorization(interaction) == false) { interaction.reply({content: `You don't have permission.`}); return; } 
+        if (checkAuthorization(interaction) == false) { interaction.editReply({content: `You don't have permission.`}); return; } 
 
         const sid = options.getString('id')
         const moneyType = options.getString('moneytype')
         const amountOfMoney = options.getString('amountofmoney')
 
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
-        if (Player === undefined) { interaction.reply({ content: `We could not find a player by the id: ${sid}.` }); return; }
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         if (Player.Functions.SetMoney(moneyType, amountOfMoney)) {
             logMessage(`<@${interaction.user.id}> has just set money for **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}`)
-            interaction.reply({ content: `**MONEY SET** -> **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}` })
+            interaction.editReply({ content: `**MONEY SET** -> **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}` })
         } else {
-            interaction.reply({ content: `There was an error setting their money.` })
+            interaction.editReply({ content: `There was an error setting their money.` })
         }
     } else if (commandName == 'getmoney') {
-        if (checkAuthorization(interaction) == false) { interaction.reply({content: `You don't have permission.`}); return; } 
+        if (checkAuthorization(interaction) == false) { interaction.editReply({content: `You don't have permission.`}); return; } 
 
         const sid = options.getString('id')
         const moneyType = options.getString('moneytype')
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
-        if (Player === undefined) { interaction.reply({ content: `We could not find a player by the id: ${sid}.` }); return; }
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         logMessage(`<@${interaction.user.id}> has just checked money for **SERVER ID** - ${sid} | **${moneyType.toUpperCase()}** - ${Player.PlayerData.money[moneyType.toLowerCase()]}`)
-        interaction.reply({ content: `**MONEY CHECK** -> **SERVER ID** - ${sid} | **${moneyType}** - ${Player.PlayerData.money[moneyType]}` })
+        interaction.editReply({ content: `**MONEY CHECK** -> **SERVER ID** - ${sid} | **${moneyType}** - ${Player.PlayerData.money[moneyType]}` })
     } else if (commandName == 'revive') {
-        if (checkAuthorization(interaction) == false) { interaction.reply({content: `You don't have permission.`}); return; } 
+        if (checkAuthorization(interaction) == false) { interaction.editReply({content: `You don't have permission.`}); return; } 
 
         const sid = options.getString('id')
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
-        if (Player === undefined) { interaction.reply({ content: `We could not find a player by the id: ${sid}.` }); return; }
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         emitNet("hospital:client:Revive", Player.PlayerData.source)
         logMessage(`<@${interaction.user.id}> has just revived **SERVER ID** - ${sid}`)
-        interaction.reply({ content: `**REVIVE** -> **SERVER ID** - ${sid}` })
+        interaction.editReply({ content: `**REVIVE** -> **SERVER ID** - ${sid}` })
     }
 });
 
