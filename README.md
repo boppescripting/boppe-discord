@@ -19,3 +19,4 @@ Feel free to join the [Discord server](https://discord.gg/wyeZYCrugs) for either
 3. `/setmoney <id> <bank/cash/crypto> <amount>` -> Set a players money.
 4. `/getmoney <id> <bank/cash/crypto>` -> Check a players money.
 5. `/revive <id>` -> Revive a player.
+6. `/kick <id> <reason>` -> Kick a player from the server.
