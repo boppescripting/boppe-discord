@@ -165,9 +165,9 @@ client.on('interactionCreate', async(interaction) => {
         const grade = options.getString('grade')
  
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
 		const FirstName = Player.PlayerData.charinfo.firstname
 		const LastName = Player.PlayerData.charinfo.lastname
-        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         if (Player.Functions.SetJob(jobcode, grade)) {
             logMessage(`<@${interaction.user.id}> has just set the job for **SERVER ID** - ${sid} | **NAME** ${FirstName} ${LastName} / **JOB CODE** - ${jobcode} | **JOB GRADE** - ${grade}`)
             interaction.editReply({ content: `**JOB SET** -> **SERVER ID** - ${sid} | **JOB CODE** - ${jobcode} | **JOB GRADE** - ${grade}` })
@@ -182,9 +182,9 @@ client.on('interactionCreate', async(interaction) => {
         const amountOfMoney = options.getString('amountofmoney')
  
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
 		const FirstName = Player.PlayerData.charinfo.firstname
 		const LastName = Player.PlayerData.charinfo.lastname
-        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         if (Player.Functions.AddMoney(moneyType, amountOfMoney)) {
             logMessage(`<@${interaction.user.id}> has just added money for **SERVER ID** - ${sid} | **NAME** ${FirstName} ${LastName} /  **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}`)
             interaction.editReply({ content: `**MONEY ADDED** -> **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}` })
@@ -199,9 +199,9 @@ client.on('interactionCreate', async(interaction) => {
         const amountOfMoney = options.getString('amountofmoney')
  
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
 		const FirstName = Player.PlayerData.charinfo.firstname
 		const LastName = Player.PlayerData.charinfo.lastname
-        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         if (Player.Functions.SetMoney(moneyType, amountOfMoney)) {
             logMessage(`<@${interaction.user.id}> has just set money for **SERVER ID** - ${sid} | **NAME** ${FirstName} ${LastName} /  **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}`)
             interaction.editReply({ content: `**MONEY SET** -> **SERVER ID** - ${sid} | **MONEY TYPE** - ${moneyType} | **AMOUNT** - ${amountOfMoney}` })
@@ -214,9 +214,9 @@ client.on('interactionCreate', async(interaction) => {
         const sid = options.getString('id')
         const moneyType = options.getString('moneytype')
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
 		const FirstName = Player.PlayerData.charinfo.firstname
 		const LastName = Player.PlayerData.charinfo.lastname
-        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         logMessage(`<@${interaction.user.id}> has just checked money for **SERVER ID** - ${sid} | **NAME** ${FirstName} ${LastName} /  **${moneyType.toUpperCase()}** - ${Player.PlayerData.money[moneyType.toLowerCase()]}`)
         interaction.editReply({ content: `**MONEY CHECK** -> **SERVER ID** - ${sid} | **${moneyType}** - ${Player.PlayerData.money[moneyType]}` })
     } else if (commandName == 'revive') {
@@ -224,9 +224,9 @@ client.on('interactionCreate', async(interaction) => {
  
         const sid = options.getString('id')
         const Player = QBCore.Functions.GetPlayer(parseInt(sid))
+        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
 		const FirstName = Player.PlayerData.charinfo.firstname
 		const LastName = Player.PlayerData.charinfo.lastname
-        if (Player === undefined) { interaction.editReply({ content: `We could not find a player by the id: ${sid}.` }); return; }
         emitNet("hospital:client:Revive", Player.PlayerData.source)
         logMessage(`<@${interaction.user.id}> has just revived **SERVER ID** - ${sid} | **NAME** ${FirstName} ${LastName}`)
         interaction.editReply({ content: `**REVIVE** -> **SERVER ID** - ${sid}` })
